@@ -1,0 +1,66 @@
+name: Docker Build CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docker-build-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-image:
+    name: Build Backend Image
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build backend image
+        run: |
+          docker build \
+            -t dealflow-backend:ci \
+            ./backend
+
+      - name: Verify backend image
+        run: |
+          docker image inspect \
+            dealflow-backend:ci \
+            > /dev/null
+
+  frontend-image:
+    name: Build Frontend Image
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build frontend image
+        run: |
+          docker build \
+            -t dealflow-frontend:ci \
+            ./frontend
+
+      - name: Verify frontend image
+        run: |
+          docker image inspect \
+            dealflow-frontend:ci \
+            > /dev/null

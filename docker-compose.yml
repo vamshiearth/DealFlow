@@ -1,21 +1,48 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: dealflow-postgres
-    restart: unless-stopped
     environment:
       POSTGRES_DB: dealflow
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: user
+      POSTGRES_USER: dealflow
+      POSTGRES_PASSWORD: ${DEALFLOW_DB_PASSWORD}
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - dealflow-postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d dealflow"]
-      interval: 10s
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U dealflow -d dealflow"
+        ]
+      interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    image: dealflow-backend:latest
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/dealflow
+      DATABASE_USERNAME: dealflow
+      DATABASE_PASSWORD: ${DEALFLOW_DB_PASSWORD}
+      JWT_SECRET: ${DEALFLOW_JWT_SECRET}
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    image: dealflow-frontend:latest
+    ports:
+      - "8082:80"
+    depends_on:
+      - backend
 
 volumes:
-  postgres_data:
+  dealflow-postgres-data:
+    external: true
