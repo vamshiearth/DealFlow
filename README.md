@@ -231,7 +231,29 @@ DealFlow/
 
 ## Screenshots
 
-Screenshots will be added for the dashboard, deals page, deal workspace, approval queue, exception queue, and Oracle CPQ workspace.
+### Dashboard
+
+![DealFlow Dashboard](docs/screenshots/dashboard.png)
+
+### Deals
+
+![DealFlow Deals](docs/screenshots/deals.png)
+
+### Approved Deal Workspace
+
+![Approved Deal](docs/screenshots/deal-approved.png)
+
+### Approval Queue
+
+![Approval Queue](docs/screenshots/approvals.png)
+
+### Exception Queue
+
+![Exception Queue](docs/screenshots/exceptions.png)
+
+### Oracle CPQ Workspace
+
+![Oracle CPQ Workspace](docs/screenshots/cpq-workspace.png)
 
 ## Demo Roles
 
