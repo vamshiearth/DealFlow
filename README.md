@@ -125,7 +125,7 @@ The frontend filters navigation for usability, but backend authorization remains
 
 The containerized application uses one public origin: `http://localhost:8082`. Nginx serves the React application and proxies `/api/*` to Spring Boot.
 
-For the detailed system architecture, see [System Architecture](docs/architecture/system-architecture.md).
+For the detailed system architecture, see [System Architecture](docs/architecture/system-architecture.md) and [Business Workflow](docs/architecture/business-workflow.md).
 
 ## Technology Stack
 
