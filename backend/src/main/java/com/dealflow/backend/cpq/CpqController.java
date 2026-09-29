@@ -16,13 +16,13 @@ public class CpqController {
         this.cpqService = cpqService;
     }
 
-    @PreAuthorize("hasAnyRole('SALES_REP', 'CPQ_ADMIN')")
+    @PreAuthorize("hasAnyRole('SALES_REP', 'SALES_MANAGER', 'CPQ_ADMIN')")
     @GetMapping("/quotes/{quoteNumber}")
     public CpqQuoteDTO getQuote(@PathVariable String quoteNumber) {
         return cpqService.getQuote(quoteNumber);
     }
 
-    @PreAuthorize("hasAnyRole('SALES_REP', 'CPQ_ADMIN')")
+    @PreAuthorize("hasAnyRole('SALES_REP', 'SALES_MANAGER', 'CPQ_ADMIN')")
     @GetMapping("/quotes/{quoteNumber}/details")
     public CpqQuoteDetailDTO getQuoteDetails(@PathVariable String quoteNumber) {
         return cpqService.getQuoteDetails(quoteNumber);

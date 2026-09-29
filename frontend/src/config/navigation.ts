@@ -22,7 +22,7 @@ export const navigationItems: NavigationItem[] = [
   {
     label: 'Oracle CPQ',
     path: '/cpq',
-    roles: ['SALES_REP', 'CPQ_ADMIN'],
+    roles: ['SALES_REP', 'SALES_MANAGER', 'CPQ_ADMIN'],
   },
 ]
 

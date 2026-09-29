@@ -22,7 +22,9 @@ function CpqPage() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const canAccessCpq = Boolean(
-    user?.roles.includes('SALES_REP') || user?.roles.includes('CPQ_ADMIN'),
+    user?.roles.includes('SALES_REP') ||
+      user?.roles.includes('SALES_MANAGER') ||
+      user?.roles.includes('CPQ_ADMIN'),
   )
 
   const importedDeal = useMemo(() => {
